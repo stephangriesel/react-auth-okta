@@ -31,13 +31,22 @@ export default withAuth(class Home extends Component {
   render() {
     if (this.state.authenticated === null) return null;
 
-    const button = this.state.authenticated ?
-      <button onClick={this.logout}>Logout</button> :
-      <button onClick={this.login}>Login</button>;
+    const mainContent = this.state.authenticated ? (
+        <div>
+            <p class="lead">You have entered the members only area, <Link to="/staff">click here</Link></p>
+            <button className="btn btn-light btn-lg" onClick={this.logout}>Logout</button>
+        </div>
+    ) : (
+        <div>
+            <p class="lead">Are you member? <Link to="/staff">Click here</Link></p>
+            <button className="btn btn-dark btn-lg" onClick={this.login}>Login</button>
+        </div>
+    );
 
     return (
-      <div>
-       
+      <div className="jumbotron">
+      <h1 className="display-4">Members Only</h1>
+      {mainContent}
       </div>
     );
   }
